@@ -17,6 +17,8 @@ import time
 import argparse
 import pdb
 import pandas as pd
+from PIL import Image
+Image.MAX_IMAGE_PIXELS = 9331200000
 
 def stitching(file_path, wsi_object, downscale = 64):
 	start = time.time()
