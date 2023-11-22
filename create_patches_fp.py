@@ -1,11 +1,11 @@
-OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
-import os
-if hasattr(os, 'add_dll_directory'):
-    # Windows
-    with os.add_dll_directory(OPENSLIDE_PATH):
-        import openslide
-else:
-    import openslide
+# OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
+# import os
+# if hasattr(os, 'add_dll_directory'):
+#     # Windows
+#     with os.add_dll_directory(OPENSLIDE_PATH):
+#         import openslide
+# else:
+#     import openslide
 # internal imports
 from wsi_core.WholeSlideImage import WholeSlideImage
 from wsi_core.wsi_utils import StitchCoords
