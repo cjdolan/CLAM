@@ -1,3 +1,11 @@
+OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
+import os
+if hasattr(os, 'add_dll_directory'):
+    # Windows
+    with os.add_dll_directory(OPENSLIDE_PATH):
+        import openslide
+else:
+    import openslide
 import torch
 import torch.nn as nn
 from math import floor
@@ -15,6 +23,7 @@ from utils.file_utils import save_hdf5
 from PIL import Image
 import h5py
 import openslide
+Image.MAX_IMAGE_PIXELS = 933120000000000
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
 def compute_w_loader(file_path, output_path, wsi, model,

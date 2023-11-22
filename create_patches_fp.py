@@ -1,3 +1,11 @@
+OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
+import os
+if hasattr(os, 'add_dll_directory'):
+    # Windows
+    with os.add_dll_directory(OPENSLIDE_PATH):
+        import openslide
+else:
+    import openslide
 # internal imports
 from wsi_core.WholeSlideImage import WholeSlideImage
 from wsi_core.wsi_utils import StitchCoords
@@ -174,7 +182,7 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 			current_seg_params['exclude_ids'] = []
 
 		w, h = WSI_object.level_dim[current_seg_params['seg_level']] 
-		if w * h > 1e8:
+		if w * h > 1e800:
 			print('level_dim {} x {} is likely too large for successful segmentation, aborting'.format(w, h))
 			df.loc[idx, 'status'] = 'failed_seg'
 			continue
