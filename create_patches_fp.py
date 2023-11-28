@@ -1,12 +1,12 @@
-# OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
-# import os
-# if hasattr(os, 'add_dll_directory'):
-#     # Windows
-#     with os.add_dll_directory(OPENSLIDE_PATH):
-#         import openslide
-# else:
-#     import openslide
-# internal imports
+OPENSLIDE_PATH = r"C:\Users\2017c\Documents\UBCData\openslide-win64-20231011\openslide-win64-20231011\bin"
+import os
+if hasattr(os, 'add_dll_directory'):
+    # Windows
+    with os.add_dll_directory(OPENSLIDE_PATH):
+        import openslide
+else:
+    import openslide
+
 from wsi_core.WholeSlideImage import WholeSlideImage
 from wsi_core.wsi_utils import StitchCoords
 from wsi_core.batch_process_utils import initialize_df
@@ -200,7 +200,10 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 		if save_mask:
 			mask = WSI_object.visWSI(**current_vis_params)
 			mask_path = os.path.join(mask_save_dir, slide_id+'.jpg')
-			mask.save(mask_path)
+			try:
+				mask.save(mask_path)
+			except:
+				pass
 
 		patch_time_elapsed = -1 # Default time
 		if patch:
@@ -314,7 +317,7 @@ if __name__ == '__main__':
 
 	seg_times, patch_times = seg_and_patch(**directories, **parameters,
 											patch_size = args.patch_size, step_size=args.step_size, 
-											seg = args.seg,  use_default_params=False, save_mask = True, 
+											seg = args.seg,  use_default_params=False, save_mask = False, 
 											stitch= args.stitch,
 											patch_level=args.patch_level, patch = args.patch,
 											process_list = process_list, auto_skip=args.no_auto_skip)
